@@ -1,0 +1,30 @@
+{% extends 'student_page.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<html lang="en">
+  <head>
+
+  </head>
+<body>
+<center>
+<h3></h3>
+
+<br><br>
+<div class="card" style="width: 18rem;">
+  <img src="{{student.image.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">NAME:{{student.name}}</h5>
+      <h5 class="card-title">AGE:{{student.age}}</h5>
+      <h5 class="card-title">PHONE NO: {{student.phone_no}}</h5>
+    <p class="card-text"></p>
+    <a href="{% url 'update_profile' %}" class="btn btn-primary">UPDATE</a>
+         </div>
+</center>
+</div>
+
+
+</body>
+
+</html>
+{% endblock %}
