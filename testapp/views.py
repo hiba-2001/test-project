@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from testapp.forms import Stud_Form, user_register, Admin_Form, Mark_Form
@@ -62,20 +63,21 @@ def admin_sign(request):
 
     return render(request, 'admin_reg.html',{'u_form':u_form,'a_form':a_form})
 
+@login_required(login_url='login_page')
 def admin_page(request):
 
     return render(request, 'admin_page.html')
-
+@login_required(login_url='login_page')
 def student_page(request):
 
     return render(request, 'student_page.html')
-
+@login_required(login_url='login_page')
 def student_view(request):
     data=Student_reg.objects.all()
     return render(request, 'view_student.html',{'data':data})
 
 
-
+@login_required(login_url='login_page')
 def add_mark(request):
     form= Mark_Form()
     if request.method=='POST':
@@ -84,11 +86,11 @@ def add_mark(request):
             form.save()
             return redirect('view_mark')
     return render(request, 'add_mark.html',{'form':form})
-
+@login_required(login_url='login_page')
 def view_mark(request):
     data=MARK.objects.all()
     return render(request, 'view_mark.html', {'data':data})
-
+@login_required(login_url='login_page')
 def mark_update(request,id):
     m=MARK.objects.get(id=id)
     form=Mark_Form(instance=m)
@@ -100,23 +102,23 @@ def mark_update(request,id):
     return render(request, 'add_mark.html',{'form':form})
 
 
-
+@login_required(login_url='login_page')
 def mark_delete(request,id):
 
         MARK.objects.get(id=id).delete()
         return redirect('view_mark')
 
-
+@login_required(login_url='login_page')
 def view_stud_mark(request):
     u = Student_reg.objects.get(user=request.user)
     data = MARK.objects.filter(name=u)
     return render(request, 'view_stud_mark.html', {'data':data})
 
-
+@login_required(login_url='login_page')
 def view_profile(request):
     student=Student_reg.objects.get(user=request.user)
     return render(request, 'view_profile.html', {'student':student})
-
+@login_required(login_url='login_page')
 def update_profile(request):
     pro=Student_reg.objects.get(user=request.user)
     form=Stud_Form(instance=pro)
@@ -126,7 +128,7 @@ def update_profile(request):
         form.save()
         return redirect('view_profile')
     return render(request, 'update_profile.html',{'form':form})
-
+@login_required(login_url='login_page')
 def logout_page(request):
     logout(request)
     return redirect('login_page')
