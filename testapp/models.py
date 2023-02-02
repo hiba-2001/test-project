@@ -2,6 +2,7 @@ import datetime
 
 from PIL import Image
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MaxValueValidator
 from django.db import models
 
 from testapp.validator import validate_file_size
@@ -43,12 +44,15 @@ class Admin_reg(models.Model):
 
 class MARK(models.Model):
     name = models.ForeignKey(Student_reg,on_delete=models.CASCADE)
-
-    english = models.IntegerField()
-    malayalam = models.IntegerField()
-    maths = models.IntegerField()
-    chemistry = models.IntegerField()
-    physics = models.IntegerField()
+    english = models.IntegerField(validators=[MaxValueValidator(50)])
+    maths = models.IntegerField(validators=[MaxValueValidator(50)])
+    chemistry = models.IntegerField(validators=[MaxValueValidator(50)])
+    physics = models.IntegerField(validators=[MaxValueValidator(50)])
+    totalmark = models.IntegerField(validators=[MaxValueValidator(200)])
+    total = models.IntegerField(default=0)
 
     def __str__(self):
-       return self.name
+       return self.name + self.total
+    def total(self):
+        self.total=self.english+self.maths+self.chemistry+self.physics
+        return self.total

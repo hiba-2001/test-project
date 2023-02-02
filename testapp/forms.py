@@ -36,7 +36,7 @@ class Admin_Form(forms.ModelForm):
     class Meta:
         model =  Admin_reg
         fields = "__all__"
-        exclude = ("user",)
+        exclude = ("user","Image",)
 
 
 class Mark_Form(forms.ModelForm):

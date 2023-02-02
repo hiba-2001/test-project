@@ -11,12 +11,13 @@
                         <tr>
                           <th>SI NO</th>
                           <th>STUDENT NAME</th>
-                          <th>PHONE NO</th>
+
                             <th>ENGLISH</th>
-                          <th>MALAYALAM</th>
+
                             <th>MATHS</th>
                             <th>CHEMISTRY</th>
                           <th>PHYSICS</th>
+                          <th>TOTAL MARK</th>
                           <th>EDIT</th>
 
 
@@ -27,12 +28,11 @@
                         <tr>
                           <td>{{forloop.counter}}</td>
                           <td>{{i.name}}</td>
-                          <td>{{i.phone_no}}</td>
                           <td>{{i.english}}</td>
-                            <td>{{i.malayalam}}</td>
                           <td>{{i.maths}}</td>
                           <td>{{i.chemistry}}</td>
                             <td>{{i.physics}}</td>
+                          <td>{{i.totalmark}}</td>
                            <td><a class="btn btn-success" href="{% url 'mark_update' i.id %}">UPDATE</a>
                           <a class="btn btn-danger" href="{% url 'mark_delete' i.id %}">DELETE</a>
                           <td>
